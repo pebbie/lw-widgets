@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+	<script type="text/javascript" src="http://linkedwidgets.org/widgets/WidgetHub.js"></script>
+	<script type="text/javascript">
+		var config = {
+			size: {width: 400, height: 250}, // the width, height of your widget (in pixels)
+			terminals: [ // define the position of your terminals
+				{"name": "output", "position" : {"left": 1, "top": 1/2}, "type": "output"}
+			],
+			resizable: true // decide whether your widget is resizable or not
+		};
+		
+		/*
+		This function defines the job of your widget.
+		*/
+		function run(input) {
+			/*
+			There are three possible commands to output data from your widget
+			1. return output;
+			This command must be placed in the run function. When it is executed, the platform transfers the output to other widgets connected with your widget in a mashup.
+			
+			2. hub.returnMainOutput(output); 
+			Having similar effect to return command, but it can be in any place of any function (Not neccessary in the run function).
+			For example, it is useful if you need to communicate with other servers to get extra data before calulating the output, 
+			and you cannot know when this extra data will arrive.
+			
+			3. hub.returnOutputAndUpdateWidgetsBehind(output); 
+			The command can also be at any place of any function. When it is executed, the platform transfers the output object to other connected widgets,
+			and, especially, requests all widgets behind this widget in a mashup to run/rerun. For example, if users fire a mouse-clicked event in your widget,
+			you want other widgets in a mashup to update their result immediately.
+			*/
+			
+			/*
+			The input and output objects are in JSON-LD format (http://www.w3.org/TR/json-ld/). Here is the sample data of your widget.
+
+			Your widget has 2 modes (functions)
+
+
+			Mode 1:
+			input = {}
+
+			output = {
+			   "@context": {
+			      "name": <a target='_blank' href="http://xmlns.com/foaf/0.1/name">"http://xmlns.com/foaf/0.1/name"</a>
+			   },
+			   "@graph": [
+			      {
+			         "@id": <a target='_blank' href="http://example.com.sampleId">"http://example.com.sampleId"</a>,
+			         "@type": <a target='_blank' href="http://dbpedia.org/ontology/Star">"http://dbpedia.org/ontology/Star"</a>,
+			         "name": "string"
+			      }
+			   ]
+			}
+
+
+			Mode 2:
+			input = {}
+
+			output = {
+			   "@context": {
+			      "name": <a target='_blank' href="http://xmlns.com/foaf/0.1/name">"http://xmlns.com/foaf/0.1/name"</a>
+			   },
+			   "@graph": [
+			      {
+			         "@id": <a target='_blank' href="http://example.com.sampleId">"http://example.com.sampleId"</a>,
+			         "@type": <a target='_blank' href="http://xmlns.com/foaf/0.1/Person">"http://xmlns.com/foaf/0.1/Person"</a>,
+			         "name": "string"
+			      }
+			   ]
+			}
+			*/
+		}
+		
+		var hub = new WidgetHub(config, run);
+	</script>
+</head>
+<body>
+
+</body>
+</html>
